@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BackOnTrack — Know What to Pay. Know When to Pay.</title>
+<style>
+:root{--navy:#06254a;--green:#19a957;--light:#f5f8fb;--text:#13233a;--muted:#607086;--red:#d94b4b;--gold:#d89a1d}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:white}
+header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid #e8edf3;background:#fff;position:sticky;top:0;z-index:10}
+.logo{font-size:25px;font-weight:800;color:var(--navy)} .logo span{color:var(--green)}
+.tag{font-size:10px;font-weight:700;letter-spacing:.4px;color:#536176}
+nav{display:flex;gap:30px;align-items:center} nav a{color:var(--navy);text-decoration:none;font-weight:600;font-size:14px}
+.btn{border:0;border-radius:8px;padding:14px 23px;font-weight:800;cursor:pointer;font-size:15px}
+.btn.green{background:var(--green);color:#fff}.btn.white{background:#fff;color:var(--navy);border:1px solid #dce5ef}
+.hero{background:linear-gradient(110deg,#06254a 0%,#0b3768 100%);color:white;padding:70px 7%;display:grid;grid-template-columns:1fr 1.15fr;gap:50px;align-items:center}
+.hero h1{font-size:52px;line-height:1.04;margin:0 0 20px;max-width:600px}.hero h1 span{color:#52d77f}
+.hero p{font-size:18px;line-height:1.6;max-width:560px;color:#e7eef7}.checks{list-style:none;padding:0;margin:25px 0}.checks li{margin:12px 0;font-weight:600}.checks li:before{content:"✓";color:#52d77f;font-size:20px;margin-right:10px}
+.dashboard{background:#fff;border-radius:14px;padding:24px;box-shadow:0 20px 60px #0004;color:var(--text)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.card{padding:14px;border:1px solid #e5ebf2;border-radius:9px}.card small{color:var(--muted)}.card strong{display:block;font-size:20px;margin-top:6px}.greenText{color:var(--green)}.redText{color:var(--red)}
+.paybox{border:1px solid #e5ebf2;border-radius:10px;padding:15px}.payrow{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf1f5}.payrow:last-child{border:0}
+.features{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;padding:35px 7%;border-bottom:1px solid #e8edf3}.feature{text-align:center}.icon{font-size:30px}.feature h3{font-size:15px;margin:8px}.feature p{font-size:12px;color:var(--muted);line-height:1.45}
+.section{padding:65px 7%;text-align:center}.section h2{font-size:34px;color:var(--navy)}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:35px}.step{border:1px solid #e1e8f0;border-radius:12px;padding:24px;background:#fff}.num{width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800}.step p{color:var(--muted);font-size:14px;line-height:1.5}
+.cta{background:#eef7f1;padding:55px 7%;text-align:center}.cta h2{font-size:34px;color:var(--navy)}
+.app{display:none;background:var(--light);min-height:100vh;padding:35px 6%}.appHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.panel{background:#fff;border-radius:12px;padding:24px;border:1px solid #e1e8f0}.panel h2{margin-top:0;color:var(--navy)}label{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}input,select{width:100%;padding:12px;border:1px solid #ccd7e3;border-radius:7px;font-size:15px}.bill{border:1px solid #e1e8f0;padding:12px;border-radius:8px;margin:10px 0;display:grid;grid-template-columns:1.3fr .8fr .8fr auto;gap:8px;align-items:end}.planItem{padding:13px;border-left:4px solid var(--green);background:#f7fbf8;margin:9px 0;border-radius:5px}.planItem.red{border-left-color:var(--red);background:#fff7f7}.planItem.gold{border-left-color:var(--gold);background:#fffaf0}
+.small{font-size:12px;color:var(--muted)} footer{background:var(--navy);color:#fff;padding:25px 7%;text-align:center;font-size:12px}
+@media(max-width:900px){nav{display:none}.hero{grid-template-columns:1fr;padding:45px 6%}.hero h1{font-size:40px}.cards,.features,.steps{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.bill{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.features,.steps,.cards{grid-template-columns:1fr}.hero h1{font-size:35px}.dashboard{padding:15px}}
+</style>
+</head>
+<body>
+<div id="home">
+<header>
+  <div><div class="logo">Back<span>OnTrack</span></div><div class="tag">KNOW WHAT TO PAY. KNOW WHEN TO PAY.</div></div>
+  <nav><a href="#how">How It Works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#about">About</a><button class="btn green" onclick="startApp()">Get Started Free</button></nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>A Clear Plan to Get Your Finances Back <span>On Track</span></h1>
+    <p>Enter your income, bills, and past-due amounts. BackOnTrack creates a simple plan showing what to pay, when to pay it, and how to get back on track.</p>
+    <ul class="checks"><li>Know what to pay first</li><li>Build a paycheck-by-paycheck plan</li><li>See your path forward</li></ul>
+    <button class="btn green" onclick="startApp()">Get Started Free →</button>
+    <div class="small" style="color:#c8d5e4;margin-top:10px">No credit card required for this demo</div>
+  </div>
+  <div class="dashboard">
+    <b style="font-size:20px;color:var(--navy)">Your Financial Recovery Plan</b>
+    <div class="cards">
+      <div class="card"><small>Monthly Income</small><strong class="greenText">$4,800</strong></div>
+      <div class="card"><small>Essential Bills</small><strong>$3,050</strong></div>
+      <div class="card"><small>Past Due</small><strong class="redText">$1,870</strong></div>
+      <div class="card"><small>Available</small><strong class="greenText">$650</strong></div>
+    </div>
+    <div class="paybox"><b>Paycheck Plan</b>
+      <div class="payrow"><span>🏠 Rent</span><b>$1,400</b></div>
+      <div class="payrow"><span>🚗 Car Payment</span><b>$400</b></div>
+      <div class="payrow"><span>💡 Electric</span><b>$175</b></div>
+      <div class="payrow"><span>🛡️ Insurance</span><b>$125</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="features">
+  <div class="feature"><div class="icon">📋</div><h3>Know What to Pay First</h3><p>Prioritize bills based on urgency and importance.</p></div>
+  <div class="feature"><div class="icon">📅</div><h3>Personalized Pay Plan</h3><p>See what to pay from each paycheck.</p></div>
+  <div class="feature"><div class="icon">🛡️</div><h3>Get Organized</h3><p>Keep due dates and amounts in one place.</p></div>
+  <div class="feature"><div class="icon">📈</div><h3>Track Progress</h3><p>Watch your recovery plan improve over time.</p></div>
+  <div class="feature"><div class="icon">🔒</div><h3>Privacy First</h3><p>Built with financial-data security in mind.</p></div>
+</section>
+
+<section id="how" class="section">
+<h2>How BackOnTrack Works</h2>
+<div class="steps">
+<div class="step"><span class="num">1</span><h3>Create Your Plan</h3><p>Start with your income and current cash.</p></div>
+<div class="step"><span class="num">2</span><h3>Enter Your Bills</h3><p>Add amounts, due dates and past-due balances.</p></div>
+<div class="step"><span class="num">3</span><h3>We Organize It</h3><p>The system sorts your obligations into a practical priority order.</p></div>
+<div class="step"><span class="num">4</span><h3>Follow the Plan</h3><p>Use your paycheck-by-paycheck schedule.</p></div>
+<div class="step"><span class="num">5</span><h3>Get Back On Track</h3><p>Track your progress toward becoming current.</p></div>
+</div>
+</section>
+
+<section id="pricing" class="cta">
+<h2>Start With a Free Recovery Plan</h2>
+<p>Build your first plan before deciding whether you need premium tools.</p>
+<button class="btn green" onclick="startApp()">Build My Plan →</button>
+</section>
+
+<section id="about" class="section"><h2>Designed Around a Real Problem</h2><p style="max-width:700px;margin:auto;color:var(--muted);line-height:1.7">BackOnTrack is designed for people who don't need another complicated spreadsheet. They need a clear answer to one question: <b>“What should I pay first, and how do I catch up?”</b></p></section>
+<footer>© 2026 BackOnTrack • Financial planning education and organization tool • Not financial, legal, or credit advice.</footer>
+</div>
+
+<div id="app" class="app">
+<div class="appHeader"><div><div class="logo">Back<span>OnTrack</span></div><div class="tag">YOUR RECOVERY PLAN</div></div><button class="btn white" onclick="showHome()">← Home</button></div>
+<div class="grid">
+<div class="panel">
+<h2>1. Your Money</h2>
+<label>Monthly take-home income</label><input id="income" type="number" placeholder="4800">
+<label>Cash available right now</label><input id="cash" type="number" placeholder="500">
+<label>Next paycheck amount</label><input id="paycheck" type="number" placeholder="1200">
+<h2 style="margin-top:25px">2. Your Bills</h2>
+<div id="bills"></div>
+<button class="btn white" onclick="addBill()">+ Add Another Bill</button>
+<button class="btn green" style="width:100%;margin-top:18px" onclick="makePlan()">Create My Recovery Plan →</button>
+</div>
+<div class="panel">
+<h2>Your Plan</h2>
+<div id="plan"><p class="small">Enter your information and click “Create My Recovery Plan.” Your demo plan will appear here.</p></div>
+</div>
+</div>
+</div>
+
+<script>
+let bills=[];
+function startApp(){document.getElementById('home').style.display='none';document.getElementById('app').style.display='block';if(!bills.length){addBill('Rent','1400','1','Essential');addBill('Car Payment','400','15','Essential');addBill('Electric','175','20','Essential');addBill('Credit Card','75','25','Debt');}window.scrollTo(0,0)}
+function showHome(){document.getElementById('app').style.display='none';document.getElementById('home').style.display='block';window.scrollTo(0,0)}
+function addBill(name='',amount='',due='',type='Debt'){
+ const id=Date.now()+Math.random();
+ bills.push(id);
+ const d=document.createElement('div');d.className='bill';d.id='b'+id;
+ d.innerHTML=`<div><label>Bill</label><input class="bn" value="${name}" placeholder="Electric"></div><div><label>Amount</label><input class="ba" type="number" value="${amount}" placeholder="0"></div><div><label>Due day</label><input class="bd" type="number" value="${due}" placeholder="15"></div><div><label>Priority</label><select class="bt"><option ${type==='Essential'?'selected':''}>Essential</option><option ${type==='Debt'?'selected':''}>Debt</option><option ${type==='Other'?'selected':''}>Other</option></select></div>`;
+ document.getElementById('bills').appendChild(d)
+}
+function makePlan(){
+ const income=+document.getElementById('income').value||0, cash=+document.getElementById('cash').value||0, paycheck=+document.getElementById('paycheck').value||income/2;
+ let data=[...document.querySelectorAll('.bill')].map(x=>({name:x.querySelector('.bn').value||'Bill',amount:+x.querySelector('.ba').value||0,due:+x.querySelector('.bd').value||31,type:x.querySelector('.bt').value}));
+ data.sort((a,b)=>({Essential:0,Debt:1,Other:2}[a.type]-({Essential:0,Debt:1,Other:2}[b.type])||a.due-b.due));
+ let total=data.reduce((s,x)=>s+x.amount,0), essential=data.filter(x=>x.type==='Essential').reduce((s,x)=>s+x.amount,0);
+ let available=Math.max(0,paycheck-essential);
+ let html=`<div class="card" style="margin-bottom:15px"><small>Monthly income</small><strong class="greenText">$${income.toLocaleString()}</strong><div class="small">Total listed bills: $${total.toLocaleString()} • Cash now: $${cash.toLocaleString()}</div></div>`;
+ html+=`<h3>Priority Order</h3>`;
+ data.forEach((x,i)=>{let cls=x.type==='Essential'?'':'gold'; if(i===0)cls='red'; html+=`<div class="planItem ${cls}"><b>${i+1}. ${x.name}</b><span style="float:right">$${x.amount.toLocaleString()}</span><div class="small">${x.type} • Due day ${x.due}</div></div>`});
+ html+=`<h3 style="margin-top:25px">Next Paycheck Guide</h3><p>Available paycheck: <b>$${paycheck.toLocaleString()}</b></p>`;
+ let running=paycheck;
+ data.forEach(x=>{if(running>0){let pay=Math.min(running,x.amount);running-=pay;if(pay>0)html+=`<div class="payrow"><span>Pay toward ${x.name}</span><b>$${pay.toLocaleString()}</b></div>`}});
+ html+=`<p class="small" style="margin-top:18px">This demo prioritizes essentials first, then debts, then other bills. A production version would use a more sophisticated rules engine, user-selected priorities, and safeguards.</p>`;
+ document.getElementById('plan').innerHTML=html;
+}
+</script>
+</body>
+</html>
